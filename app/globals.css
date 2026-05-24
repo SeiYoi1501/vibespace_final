@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
+/* ─── CSS Variables ────────────────────────────────────── */
+:root {
+  --bg:           #020b18;
+  --bg2:          #04111f;
+  --bg3:          #071828;
+  --card:         rgba(7, 24, 40, 0.9);
+  --card-hover:   rgba(10, 30, 54, 0.95);
+  --border:       rgba(56, 139, 253, 0.15);
+  --border-hover: rgba(56, 139, 253, 0.4);
+  --blue:         #2563eb;
+  --blue-light:   #3b82f6;
+  --blue-bright:  #60a5fa;
+  --blue-glow:    rgba(37, 99, 235, 0.4);
+  --cyan:         #06b6d4;
+  --cyan-glow:    rgba(6, 182, 212, 0.3);
+  --white:        #e8f0fe;
+  --white2:       #a8bfe8;
+  --muted:        #3d5a80;
+  --muted2:       #2a3f58;
+  --success:      #10b981;
+  --danger:       #ef4444;
+  --orange:       #f97316;
+  --yellow:       #fbbf24;
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --radius:       14px;
+  --radius-lg:    20px;
+  --shadow:       0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-blue:  0 0 32px rgba(37, 99, 235, 0.25);
+}
+
+/* ─── Reset ────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 90% 60% at 50% -5%,  rgba(37,99,235,0.14) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 90% 95%,  rgba(6,182,212,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 30% 25% at 5%  60%,  rgba(37,99,235,0.05) 0%, transparent 50%);
+  color: var(--white);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--font-body); cursor: pointer; }
+input, textarea, select { font-family: var(--font-body); outline: none; }
+::selection { background: rgba(37,99,235,0.35); }
+
+/* ─── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: rgba(56,139,253,0.3); border-radius: 3px; }
+
+/* ─── Animations ────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+@keyframes glow-pulse {
+  0%,100% { box-shadow: 0 0 20px var(--blue-glow); }
+  50%      { box-shadow: 0 0 44px rgba(37,99,235,0.6); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes float {
+  0%,100% { transform: translateY(0);    }
+  50%      { transform: translateY(-6px); }
+}
+
+.anim-up   { animation: fadeUp  0.55s ease both; }
+.anim-up-2 { animation: fadeUp  0.55s 0.12s ease both; }
+.anim-up-3 { animation: fadeUp  0.55s 0.24s ease both; }
+.anim-up-4 { animation: fadeUp  0.55s 0.36s ease both; }
+.anim-in   { animation: fadeIn  0.4s  ease both; }
+
+/* ─── Skeleton ──────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--bg3) 25%,
+    rgba(56,139,253,0.07) 50%,
+    var(--bg3) 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* ─── Antd overrides ────────────────────────────────────── */
+.ant-card {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--white) !important;
+}
+.ant-card-meta-title   { color: var(--white)  !important; }
+.ant-card-meta-description { color: var(--white2) !important; }
+.ant-tag { border: none !important; }
+.ant-spin-text { color: var(--blue-bright) !important; }
+/* Nav hover */
+.vs-nav-link:hover {
+  color: #e8f0fe !important;
+  background: rgba(37,99,235,0.15) !important;
+}
+
+.ant-message-notice-content {
+  background: var(--bg3) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--white) !important;
+}
