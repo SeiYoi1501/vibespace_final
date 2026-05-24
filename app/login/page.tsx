@@ -3,12 +3,10 @@ import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-// ── tách riêng vì useSearchParams cần Suspense ─────────────────────────────
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get('redirect') ?? '/profile';
-
   const [form, setForm] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -37,10 +35,8 @@ function LoginForm() {
         <h1 style={{ fontFamily: "'Syne',sans-serif", fontSize: 26, fontWeight: 800, color: '#e8f0fe', margin: '0 0 6px', letterSpacing: '-0.02em' }}>Đăng nhập</h1>
         <p style={{ color: '#3d5a80', fontSize: 14 }}>Chào mừng trở lại VibeSpace!</p>
       </div>
-
       {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', color: '#ef4444', padding: '12px 16px', borderRadius: 12, fontSize: 14, fontWeight: 600, marginBottom: 20 }}>{error}</div>}
       {success && <div style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', color: '#10b981', padding: '12px 16px', borderRadius: 12, fontSize: 14, fontWeight: 600, marginBottom: 20 }}>✓ {success}</div>}
-
       <form onSubmit={handleSubmit}>
         {[
           { label: 'Email', name: 'email', type: 'email', ph: 'email@example.com' },
@@ -48,14 +44,13 @@ function LoginForm() {
         ].map(f => (
           <div key={f.name} style={{ marginBottom: 18 }}>
             <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#a8bfe8', marginBottom: 7 }}>{f.label}</label>
-            <input
-              type={f.type} placeholder={f.ph}
+            <input type={f.type} placeholder={f.ph}
               value={form[f.name as keyof typeof form]}
               onChange={e => setForm(p => ({ ...p, [f.name]: e.target.value }))}
               required
               style={{ width: '100%', padding: '13px 16px', background: 'rgba(4,17,31,0.8)', border: '1px solid rgba(56,139,253,0.15)', borderRadius: 12, color: '#e8f0fe', fontSize: 14, boxSizing: 'border-box' }}
               onFocus={e => { e.target.style.borderColor = 'rgba(59,130,246,0.5)'; e.target.style.boxShadow = '0 0 16px rgba(37,99,235,0.15)'; }}
-              onBlur={e =>  { e.target.style.borderColor = 'rgba(56,139,253,0.15)'; e.target.style.boxShadow = 'none'; }}
+              onBlur={e => { e.target.style.borderColor = 'rgba(56,139,253,0.15)'; e.target.style.boxShadow = 'none'; }}
             />
           </div>
         ))}
@@ -63,7 +58,6 @@ function LoginForm() {
           {loading ? 'Đang đăng nhập...' : 'Đăng nhập →'}
         </button>
       </form>
-
       <p style={{ textAlign: 'center', marginTop: 24, fontSize: 14, color: '#3d5a80' }}>
         Chưa có tài khoản?{' '}
         <Link href="/register" style={{ color: '#60a5fa', fontWeight: 700 }}>Đăng ký miễn phí</Link>
@@ -72,18 +66,14 @@ function LoginForm() {
   );
 }
 
-// ── Page chính — bọc LoginForm trong Suspense ──────────────────────────────
 export default function LoginPage() {
   return (
     <div style={{ minHeight: 'calc(100vh - 64px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 20px', fontFamily: "'DM Sans',sans-serif", position: 'relative' }}>
       <div style={{ position: 'fixed', inset: 0, zIndex: 0, backgroundImage: 'linear-gradient(rgba(37,99,235,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.04) 1px,transparent 1px)', backgroundSize: '50px 50px', pointerEvents: 'none' }} />
-
       <div className="anim-up" style={{ width: '100%', maxWidth: 440, position: 'relative', zIndex: 1 }}>
         <div style={{ background: 'rgba(7,24,40,0.95)', border: '1px solid rgba(56,139,253,0.2)', borderRadius: 24, overflow: 'hidden', boxShadow: '0 0 60px rgba(37,99,235,0.12)', backdropFilter: 'blur(16px)' }}>
           <div style={{ height: 3, background: 'linear-gradient(90deg,#2563eb,#06b6d4)' }} />
-          <Suspense fallback={
-            <div style={{ padding: '60px', textAlign: 'center', color: '#3d5a80' }}>Đang tải...</div>
-          }>
+          <Suspense fallback={<div style={{ padding: '60px', textAlign: 'center', color: '#3d5a80' }}>Đang tải...</div>}>
             <LoginForm />
           </Suspense>
         </div>
