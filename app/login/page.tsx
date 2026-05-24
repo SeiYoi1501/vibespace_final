@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-
 export const dynamic = "force-dynamic";
+
 export default function LoginPage() {
   const router=useRouter();
   const searchParams=useSearchParams();
