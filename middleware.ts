@@ -14,7 +14,6 @@ export async function middleware(req: NextRequest) {
       res.cookies.delete('vs_admin_token');
       return res;
     }
-    return NextResponse.next();
   }
 
   // ── Bảo vệ /profile
