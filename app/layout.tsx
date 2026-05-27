@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
-import Link from 'next/link';
+import NavbarClient from './_navbar';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -54,51 +54,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }}>VibeSpace</span>
             </Link>
 
-            {/* Nav links */}
-            <nav style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-              {[
-                { href: '/',         label: 'Trang chủ' },
-                { href: '/events',   label: 'Sự kiện'   },
-                { href: '/contact',  label: 'Liên hệ'   },
-                { href: '/login',    label: 'Đăng nhập' },
-                { href: '/register', label: 'Đăng ký'   },
-                { href: '/profile',  label: 'Hồ sơ'     },
-                { href: '/admin',    label: '⚙️ Admin'   },
-              ].map(({ href, label }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="vs-nav-link"
-                  style={{
-                    padding: '6px 14px',
-                    borderRadius: 8,
-                    fontSize: 14,
-                    fontWeight: 500,
-                    color: '#a8bfe8',
-                    transition: 'all 0.18s ease',
-                    whiteSpace: 'nowrap',
-                  }}
-
-                >
-                  {label}
-                </Link>
-              ))}
-
-              {/* CTA Button */}
-              <Link href="/events" style={{
-                marginLeft: 8,
-                padding: '8px 18px',
-                background: 'linear-gradient(135deg, #2563eb, #1d4ed8)',
-                color: '#fff',
-                borderRadius: 10,
-                fontSize: 14,
-                fontWeight: 700,
-                boxShadow: '0 0 16px rgba(37,99,235,0.35)',
-                transition: 'all 0.2s ease',
-              }}>
-                Đặt vé ngay
-              </Link>
-            </nav>
+            {/* Nav links — Admin chỉ hiện khi đã đăng nhập admin */}
+            <NavbarClient />
           </header>
 
           {/* ── Main ── */}
